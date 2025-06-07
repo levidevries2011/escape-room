@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Escaperoom: De Kluis van Professor X</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #f0f0f0;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    .room {
+      display: none;
+      margin-top: 20px;
+    }
+    .visible {
+      display: block;
+    }
+    input[type="text"] {
+      padding: 5px;
+      margin-right: 10px;
+    }
+    button {
+      padding: 5px 10px;
+    }
+    .correct {
+      color: lightgreen;
+    }
+    .wrong {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔐 Escaperoom: De Kluis van Professor X</h1>
+  <p>Welkom! Ontsnap door alle drie de kamers op te lossen.</p>
+
+  <div class="room visible" id="room1">
+    <h2>🧩 Kamer 1: Het Bureau</h2>
+    <p>De klok sprak driemaal: ochtend, middag, avond. Neem het eerste cijfer van elk moment.</p>
+    <input type="text" id="input1" placeholder="3-cijferige code">
+    <button onclick="checkAnswer(1, '812')">Controleer</button>
+    <p id="feedback1"></p>
+  </div>
+
+  <div class="room" id="room2">
+    <h2>📚 Kamer 2: De Boekenplank</h2>
+    <p>Zoek het woord:</p>
+    <pre>
+N D K
+R A U
+T E S
+    </pre>
+    <p>Tip: van linksboven naar rechtsonder</p>
+    <input type="text" id="input2" placeholder="Woord">
+    <button onclick="checkAnswer(2, 'kasteel')">Controleer</button>
+    <p id="feedback2"></p>
+  </div>
+
+  <div class="room" id="room3">
+    <h2>🔐 Kamer 3: De Kluis</h2>
+    <p>Het is niet WAT je weet, maar WIE. De sleutel ligt in je reis tot nu toe.</p>
+    <input type="text" id="input3" placeholder="4-lettercode">
+    <button onclick="checkAnswer(3, 'xena')">Controleer</button>
+    <p id="feedback3"></p>
+  </div>
+
+  <div class="room" id="room4">
+    <h2>🎉 Gefeliciteerd!</h2>
+    <p>Je hebt de kluis geopend. Maar dit was nog maar Level 1...</p>
+  </div>
+
+  <script>
+    function checkAnswer(room, correct) {
+      const input = document.getElementById('input' + room).value.trim().toLowerCase();
+      const feedback = document.getElementById('feedback' + room);
+
+      if (input === correct) {
+        feedback.textContent = '✔️ Correct!';
+        feedback.className = 'correct';
+        document.getElementById('room' + room).classList.remove('visible');
+        document.getElementById('room' + (room + 1)).classList.add('visible');
+      } else {
+        feedback.textContent = '❌ Probeer opnieuw.';
+        feedback.className = 'wrong';
+      }
+    }
+  </script>
+</body>
+</html>
